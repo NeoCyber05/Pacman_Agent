@@ -1,4 +1,3 @@
-from unittest import result
 from Utils.Utils import find_nearest_food, moving, isValid
 
 def BFS(_map, food_positions, start_row, start_col, N, M):
