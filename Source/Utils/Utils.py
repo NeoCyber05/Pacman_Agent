@@ -14,7 +14,7 @@ def isValid(_map,row:int ,col:int ,N:int , M:int ) -> bool:
 
 #Check chạm tường
 def isWall(_map, row: int, col: int, N: int, M: int) -> bool:
-    return is_in_bounds(row, col, N, M) and _map[row][col] != WALL
+    return in_bound(row, col, N, M) and _map[row][col] != WALL
 
 
 # Tính kc Manhattan
