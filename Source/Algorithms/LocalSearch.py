@@ -1,4 +1,4 @@
-from Utils.utils import moving,isWall
+from Utils.Utils import moving,isWall
 from constants import FOOD,MONSTER, WALL
 
 def update_cost(_map, pos, current_pos, N, M, depth, visited, object_type, cost):
