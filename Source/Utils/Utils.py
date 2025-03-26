@@ -2,7 +2,6 @@ from constants import FOOD, EMPTY, WALL
 
 #          phải    trái     lên      xuống
 moving = [[0, 1], [0, -1], [1, 0], [-1, 0]]
-#DDX -> moving
 
 #Check object có nằm trong map ko
 def in_bound(row:int , col:int ,N:int,M:int ) -> bool:
