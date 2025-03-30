@@ -32,8 +32,8 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
 
     # Hàm tính khoảng cách từ vị trí bắt đầu đến một thức ăn
     def distance_to_food(food):
-        index, row,col = food
-
+        index, position = food
+        food_row, food_col = position
         distance = Manhattan(food_row, food_col, start_row, start_col)
         return distance
 
@@ -41,7 +41,8 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
     nearest_food = min(toa_do_food, key=distance_to_food)
 
     # nearest_food là một tuple (index, [row, col])
-    index, food_row,food_col = nearest_food
+    index, position = nearest_food
+    food_row, food_col = position
     return [food_row, food_col, index]
 
 
