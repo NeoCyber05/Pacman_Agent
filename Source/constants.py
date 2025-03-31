@@ -3,7 +3,7 @@ ALGORITHM: str = "MINIMAX"
 LEVEL_TO_ALGORITHM = {
     "LEVEL1": "BFS",
     "LEVEL2": "Local Search",
-    "LEVEL3": "MCTS",
+   # "LEVEL3": "MCTS",
     "LEVEL4": "Minimax"
 }
 
