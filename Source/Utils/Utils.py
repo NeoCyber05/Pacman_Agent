@@ -3,10 +3,7 @@ from constants import FOOD, EMPTY, WALL
 #          phải    trái     lên      xuống
 moving = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 #Check object có nằm trong map ko
 def in_bound(row:int , col:int ,N:int,M:int ) -> bool:
     return 0<row<N and 0< col < M
@@ -17,12 +14,7 @@ def isValid(_map,row:int ,col:int ,N:int , M:int ) -> bool:
 
 #Check chạm tường
 def isWall(_map, row: int, col: int, N: int, M: int) -> bool:
-<<<<<<< Updated upstream
     return in_bound(row, col, N, M) and _map[row][col] != WALL
-
-=======
-    return is_in_bounds(row, col, N, M) and _map[row][col] != WALL
->>>>>>> Stashed changes
 
 # Tính kc Manhattan
 def Manhattan(x1: int, y1: int, x2: int, y2: int) -> float:
@@ -40,13 +32,9 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
 
     # Hàm tính khoảng cách từ vị trí bắt đầu đến một thức ăn
     def distance_to_food(food):
-<<<<<<< Updated upstream
         index, position = food
         food_row, food_col = position
-=======
         index, row,col = food
-
->>>>>>> Stashed changes
         distance = Manhattan(food_row, food_col, start_row, start_col)
         return distance
 
@@ -54,12 +42,9 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
     nearest_food = min(toa_do_food, key=distance_to_food)
 
     # nearest_food là một tuple (index, [row, col])
-<<<<<<< Updated upstream
     index, position = nearest_food
     food_row, food_col = position
-=======
     index, food_row,food_col = nearest_food
->>>>>>> Stashed changes
     return [food_row, food_col, index]
 
 
