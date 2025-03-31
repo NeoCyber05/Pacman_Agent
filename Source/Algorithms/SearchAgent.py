@@ -1,6 +1,8 @@
 from Algorithms.BFS import BFS
 from Algorithms.LocalSearch import LocalSearch
 from Algorithms.AStar import AStar
+from Algorithms.MCTS import MCTS  # Thêm import
+
 
 class SearchAgent:
     def __init__(self, _map, _food_Position, start_row, start_col, N, M):
@@ -11,7 +13,7 @@ class SearchAgent:
         self.N = N
         self.M = M
 
-    def execute(self, ALGORITHMS, visited=None, depth=4, Score=0):
+    def execute(self, ALGORITHMS, visited=None, depth=4, Score=0, iterations=100):  # Thêm tham số iterations
         if ALGORITHMS == "BFS":
             return BFS(self.map, self.food_Position, self.start_row, self.start_col, self.N, self.M)
         if ALGORITHMS == "A*":
@@ -22,3 +24,5 @@ class SearchAgent:
             return minimaxAgent(self.map, self.start_row, self.start_col, self.N, self.M, depth, Score)
         if ALGORITHMS == "Expect":
             return ExpectAgent(self.map, self.start_row, self.start_col, self.N, self.M, depth, Score)
+        if ALGORITHMS == "MCTS":  # Thêm MCTS
+            return MCTS(self.map, self.food_Position, self.start_row, self.start_col, self.N, self.M, iterations)
