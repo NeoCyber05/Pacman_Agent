@@ -1,5 +1,5 @@
 from Utils.Utils import moving,isWall
-from constants import FOOD,MONSTER, WALL
+from Constants.constants import FOOD,MONSTER, WALL
 
 def update_cost(_map, pos, current_pos, N, M, depth, visited, object_type, cost):
     """Cập nhật điểm số cho các ô dựa trên loại đối tượng và khoảng cách"""
@@ -71,7 +71,7 @@ def local_search(_map, start_row, start_col, N, M, visited_penalty):
     max_score = float("-inf")
     best_move = []
 
-    for d_r, d_c in DDX:
+    for d_r, d_c in moving:
         new_row, new_col = start_row + d_r, start_col + d_c
         if _map[new_row][new_col] != WALL and cost[new_row][new_col] > max_score:
             max_score = cost[new_row][new_col]

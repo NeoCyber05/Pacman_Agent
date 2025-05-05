@@ -1,4 +1,4 @@
-from constants import FOOD, EMPTY, WALL
+from Constants.constants import FOOD, EMPTY, WALL
 
 #          phải    trái     lên      xuống
 moving = [[0, 1], [0, -1], [1, 0], [-1, 0]]

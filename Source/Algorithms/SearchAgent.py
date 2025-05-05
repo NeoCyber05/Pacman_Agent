@@ -1,7 +1,7 @@
-from Algorithms.BFS import BFS
-from Algorithms.LocalSearch import LocalSearch
-from Algorithms.AStar import AStar
-from Algorithms.MCTS import MCTS  # Thêm import
+from Algorithms.BFS import *
+from Algorithms.LocalSearch import *
+from Algorithms.AStar import *
+from Algorithms.MCTS import *  # Thêm import
 
 
 class SearchAgent:

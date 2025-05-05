@@ -1,12 +1,9 @@
 import os
-
-import pygame
 import sys
 
-from constants import FPS, WIDTH, HEIGHT, BLUE, BLACK, WALL, FOOD, WHITE, YELLOW, MONSTER, IMAGE_GHOST, \
-    IMAGE_PACMAN
+import pygame
+from Constants.constants import *
 
-# Khởi tạo các thành phần pygame
 clock = pygame.time.Clock()
 bg = pygame.image.load("images/home_bg.png")
 bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
@@ -14,18 +11,13 @@ pygame.init()
 font = pygame.font.SysFont('Arial', 40)
 my_font = pygame.font.SysFont('Comic Sans MS', 70)
 
-# Biến toàn cục
 _N = _M = 0
 __map = 0
 SIZE_WALL = 20
 
 
 class Button:
-    """
-    Lớp Button dùng để tạo các phần tử giao diện tương tác
-    """
     def __init__(self, x, y, width, height, screen, buttonText="Button", onClickFunction=None):
-        # Khởi tạo thuộc tính của nút
         self.x = x
         self.y = y
         self.width = width
@@ -33,24 +25,18 @@ class Button:
         self.onClickFunction = onClickFunction
         self.screen = screen
 
-        # Định nghĩa màu sắc cho các trạng thái khác nhau của nút
         self.fillColors = {
             'normal': '#FF4500',
             'hover': '#FF6347',
             'pressed': '#FF7F50',
         }
 
-        # Tạo bề mặt và hình chữ nhật cho nút
         self.buttonSurface = pygame.Surface((self.width, self.height))
         self.buttonRect = pygame.Rect(self.x, self.y, self.width, self.height)
 
-        # Hiển thị văn bản của nút
         self.buttonSurf = font.render(buttonText, True, (255, 255, 255))
 
     def process(self):
-        """
-        Xử lý tương tác và hiển thị nút
-        """
         mousePos = pygame.mouse.get_pos()
         self.buttonSurface.fill(self.fillColors['normal'])
         if self.buttonRect.collidepoint(mousePos):
@@ -59,7 +45,6 @@ class Button:
                 self.buttonSurface.fill(self.fillColors['pressed'])
                 self.onClickFunction()
 
-        # Canh giữa văn bản trên nút
         self.buttonSurface.blit(self.buttonSurf, [
             self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
             self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
@@ -69,147 +54,149 @@ class Button:
 
 
 class Menu:
-    """
-    Lớp Menu chính cho trò chơi
-    """
     def __init__(self, screen):
-        # Khởi tạo thuộc tính menu
         self.current_level = 0
+        self.current_algorithm = ""  # New variable to store algorithm selection
         self.clicked = False
         self.map_name = []
         self.current_map = 0
         self.done = False
-        self.current_screen = 1  # Bắt đầu từ menu chính
+        self.current_screen = 1
         self.screen = screen
-        
-        # Tạo nút cho menu chính
         self.btnStart = Button(WIDTH // 2 - 100 + 5, HEIGHT - 170, 200, 100, screen, "Start", self.myFunction)
 
-        # Tạo nút cho lựa chọn cấp độ
-        self.btnLevel1 = Button(WIDTH // 2 - 150, HEIGHT // 4 * 0 + 20, 300, 100, screen, "Level 1",
-                                self._load_map_level_1)
-        self.btnLevel2 = Button(WIDTH // 2 - 150, HEIGHT // 4 * 1 + 20, 300, 100, screen, "Level 2",
-                                self._load_map_level_2)
-        self.btnLevel3 = Button(WIDTH // 2 - 150, HEIGHT // 4 * 2 + 20, 300, 100, screen, "Level 3",
-                                self._load_map_level_3)
-        self.btnLevel4 = Button(WIDTH // 2 - 150, HEIGHT // 4 * 3 + 20, 300, 100, screen, "Level 4",
-                                self._load_map_level_4)
+        # Level buttons
+        self.btnLevel1 = Button(WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "No Monster",
+                                self._load_level_1)
+        #self.btnLevel2 = Button(2 * WIDTH // 5 - 100, HEIGHT // 2, 180, 100, screen, "Level 2",self._load_level_2)
+        self.btnLevel3 = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "Random",
+                                self._load_level_3)
+        self.btnLevel4 = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "A*",
+                                self._load_level_4)
 
-        # Tạo nút cho điều hướng bản đồ
+        # Algorithm buttons
+        button_width = 200
+        button_spacing = 20
+        total_width = 4 * button_width + 3 * button_spacing
+        start_x = (WIDTH - total_width) // 2
+
+        self.btnBFS = Button(start_x, HEIGHT // 2, button_width, 80, screen, "BFS",
+                             lambda: self._set_algorithm("BFS"))
+        self.btnLocalSearch = Button(start_x + button_width + button_spacing, HEIGHT // 2, button_width, 80, screen, "Local Search",
+                                    lambda: self._set_algorithm("Local Search"))
+        self.btnMinimax = Button(start_x + 2 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "Minimax",
+                                lambda: self._set_algorithm("Minimax"))
+        self.btnRandom = Button(start_x + 3 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "Random",
+                               lambda: self._set_algorithm("Random"))
+
+        # Map navigation buttons
         self.btnPrev = Button(WIDTH // 2 - 250, HEIGHT // 4 * 3 + 35, 100, 100, screen, "<", self.prevMap)
         self.btnNext = Button(WIDTH // 2 + 150, HEIGHT // 4 * 3 + 35, 100, 100, screen, ">", self.nextMap)
         self.btnPlay = Button(WIDTH // 2 - 75, HEIGHT // 4 * 3 + 35, 150, 100, screen, "PLAY", self.selectMap)
 
-        # Tạo nút quay lại
-        self.btnBack = Button(40, HEIGHT // 4 * 3 + 35, 150, 100, screen, "BACK", self.myFunction)
-
-    def nextMap(self):
-        """
-        Chuyển đến bản đồ tiếp theo trong cấp độ hiện tại
-        """
-        if self.clicked:
-            self.current_screen = 3
-            self.current_map = (self.current_map + 1) % len(self.map_name)
-        self.clicked = False
-
-    def prevMap(self):
-        """
-        Chuyển đến bản đồ trước đó trong cấp độ hiện tại
-        """
-        if self.clicked:
-            self.current_screen = 3
-            self.current_map -= 1
-            if self.current_map < 0:
-                self.current_map += len(self.map_name)
-        self.clicked = False
+        # Back buttons
+        self.btnBack = Button(40, HEIGHT // 4 * 3 + 35, 150, 100, screen, "BACK", self.goBack)
+        self.btnAlgoBack = Button(40, HEIGHT // 4 * 3 + 35, 150, 100, screen, "BACK", self.goBackToLevel)
 
     def myFunction(self):
-        """
-        Chuyển đến màn hình lựa chọn cấp độ và đặt lại lựa chọn
-        """
-        self.current_screen = 2
-        self.map_name = []
-        self.current_map = 0
-        self.current_level = 0
+        """Callback for the Start button"""
+        if self.clicked:
+            self.current_screen = 2  # Move to level selection screen
+        self.clicked = False
 
-    def _load_map_level_1(self):
-        """
-        Tải bản đồ cho Cấp độ 1
-        """
+    def _set_algorithm(self, algorithm):
+        if self.clicked:
+            self.current_algorithm = algorithm
+            self._load_maps_for_level()
+            self.current_screen = 3
+        self.clicked = False
+
+    def _load_level_1(self):
         if self.clicked:
             self.current_level = 1
-            for file in os.listdir('../Input/Level1'):
-                self.map_name.append('../Input/Level1/' + file)
-            self.current_screen = 3
+            self.current_screen = 5  # Go to algorithm selection
         self.clicked = False
 
-    def _load_map_level_2(self):
-        """
-        Tải bản đồ cho Cấp độ 2
-        """
+    def _load_level_2(self):
         if self.clicked:
             self.current_level = 2
-            for file in os.listdir('../Input/Level2'):
-                self.map_name.append('../Input/Level2/' + file)
-            self.current_screen = 3
+            self.current_screen = 5  # Go to algorithm selection
         self.clicked = False
 
-    def _load_map_level_3(self):
-        """
-        Tải bản đồ cho Cấp độ 3
-        """
+    def _load_level_3(self):
         if self.clicked:
             self.current_level = 3
-            for file in os.listdir('../Input/Level3'):
-                self.map_name.append('../Input/Level3/' + file)
-            self.current_screen = 3
+            self.current_screen = 5  # Go to algorithm selection
         self.clicked = False
 
-    def _load_map_level_4(self):
-        """
-        Tải bản đồ cho Cấp độ 4
-        """
+    def _load_level_4(self):
         if self.clicked:
             self.current_level = 4
-            for file in os.listdir('../Input/Level4'):
-                self.map_name.append('../Input/Level4/' + file)
-            self.current_screen = 3
+            self.current_screen = 5  # Go to algorithm selection
         self.clicked = False
 
-    def draw_map(self, fileName):
-        """
-        Vẽ bản xem trước bản đồ dựa trên tệp bản đồ đã chọn
-        """
-        # Hiển thị thông tin cấp độ và bản đồ
-        text_surface = my_font.render(
-            'LEVEL {level} - MAP {map}'.format(level=self.current_level, map=self.current_map + 1), False, WHITE)
-        self.screen.blit(text_surface, (WIDTH // 2 - 270, 0))
+    def _load_maps_for_level(self):
+        """Load maps for the current level"""
+        self.map_name = []
+        self.current_map = 0
+        level_dir = f'../Input/Mode{self.current_level}'
+        for file in os.listdir(level_dir):
+            self.map_name.append(f'{level_dir}/{file}')
 
-        # Mở và đọc tệp bản đồ
-        f = open(fileName, "r")
+    def goBack(self):
+        """Go back to algorithm selection"""
+        self.current_screen = 5
+
+    def goBackToLevel(self):
+        """Go back to level selection"""
+        self.current_screen = 2
+
+    def prevMap(self):
+        """Navigate to the previous map"""
+        if self.clicked:
+            if len(self.map_name) > 0:
+                self.current_map = (self.current_map - 1) % len(self.map_name)
+                self.current_screen = 3  # Refresh map display
+        self.clicked = False
+
+    def nextMap(self):
+        """Navigate to the next map"""
+        if self.clicked:
+            if len(self.map_name) > 0:
+                self.current_map = (self.current_map + 1) % len(self.map_name)
+                self.current_screen = 3  # Refresh map display
+        self.clicked = False
+
+    def selectMap(self):
+        """Select the current map and finish"""
+        if self.clicked and len(self.map_name) > 0:
+            self.done = True
+        self.clicked = False
+
+    def draw_map(self, map_path):
+       # text_surface = my_font.render(
+       #     f'LEVEL {self.current_level} - MAP {self.current_map + 1} - {self.current_algorithm}',     False, GREEN)
+       #self.screen.blit(text_surface, (WIDTH // 2 - 270, 0))
+
+        f = open(map_path, "r")
         x = f.readline().split()
         count_ghost = 0
         N, M = int(x[0]), int(x[1])
 
-        # Tính toán lề để canh giữa bản đồ
         MARGIN_TOP = 100
         MARGIN_LEFT = (WIDTH - M * SIZE_WALL) // 2
 
-        # Vẽ các phần tử bản đồ
         for i in range(N):
             line = f.readline().split()
             for j in range(M):
                 cell = int(line[j])
                 if cell == WALL:
-                    # Vẽ tường
                     image = pygame.Surface([SIZE_WALL, SIZE_WALL])
-                    # image.fill(color)
                     pygame.draw.rect(image, BLUE, (0, 0, SIZE_WALL, SIZE_WALL), 1)
                     top = i * SIZE_WALL + MARGIN_TOP
                     left = j * SIZE_WALL + MARGIN_LEFT
                     self.screen.blit(image, (left, top))
                 elif cell == FOOD:
-                    # Vẽ thức ăn
                     image = pygame.Surface([SIZE_WALL // 2, SIZE_WALL // 2])
                     image.fill(WHITE)
                     image.set_colorkey(WHITE)
@@ -219,7 +206,6 @@ class Menu:
                     left = j * SIZE_WALL + MARGIN_LEFT + SIZE_WALL // 2 - SIZE_WALL // 4
                     self.screen.blit(image, (left, top))
                 elif cell == MONSTER:
-                    # Vẽ ma
                     image = pygame.image.load(IMAGE_GHOST[count_ghost]).convert_alpha()
                     image = pygame.transform.scale(image, (SIZE_WALL, SIZE_WALL))
                     top = i * SIZE_WALL + MARGIN_TOP
@@ -227,7 +213,7 @@ class Menu:
                     count_ghost = (count_ghost + 1) % len(IMAGE_GHOST)
                     self.screen.blit(image, (left, top))
 
-        # Vẽ vị trí Pacman
+        # Draw Pacman
         x = f.readline().split()
         image = pygame.image.load(IMAGE_PACMAN[0]).convert_alpha()
         image = pygame.transform.scale(image, (SIZE_WALL, SIZE_WALL))
@@ -237,14 +223,7 @@ class Menu:
 
         f.close()
 
-    def selectMap(self):
-        if self.clicked:
-            self.done = True
-
     def run(self):
-        """
-        Vòng lặp menu chính
-        """
         while not self.done:
             self.clicked = False
             for event in pygame.event.get():
@@ -254,27 +233,43 @@ class Menu:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.clicked = True
 
-            # Màn hình menu chính
             if self.current_screen == 1:
+                # Main menu
                 self.screen.blit(bg, (0, 0))
                 self.btnStart.process()
 
-            # Màn hình lựa chọn cấp độ
             elif self.current_screen == 2:
+                # Level selection
                 self.screen.fill(BLACK)
+                text_surface = my_font.render('Select Ghost Level', False, GREEN)
+                self.screen.blit(text_surface, (WIDTH // 2 - 250, 10))
                 self.btnLevel1.process()
-                self.btnLevel2.process()
+                #self.btnLevel2.process()
                 self.btnLevel3.process()
                 self.btnLevel4.process()
 
-            # Màn hình hiển thị bản đồ ban đầu
+            elif self.current_screen == 5:
+                # Algorithm selection (new screen)
+                self.screen.fill(BLACK)
+                text_surface = my_font.render('Select PacMan Algorithm', False, GREEN)
+                self.screen.blit(text_surface, (WIDTH // 2 - 300, 10))
+                self.btnBFS.process()
+                self.btnLocalSearch.process()
+                self.btnMinimax.process()
+                self.btnRandom.process()
+                self.btnAlgoBack.process()
+
             elif self.current_screen == 3:
+                # Load map display
                 self.screen.fill(BLACK)
                 self.current_screen = 4
                 self.draw_map(self.map_name[self.current_map])
 
-            # Màn hình điều hướng bản đồ
             elif self.current_screen == 4:
+                # Map navigation
+                text = f'LEVEL {self.current_level} - {self.current_algorithm}'
+                text_surface = my_font.render(text, False, GREEN)
+                self.screen.blit(text_surface, (WIDTH // 2 - 270, 0))
                 self.btnNext.process()
                 self.btnPrev.process()
                 self.btnPlay.process()
@@ -283,5 +278,5 @@ class Menu:
             pygame.display.flip()
             clock.tick(FPS)
 
-        # Trả về cấp độ và tệp bản đồ đã chọn
-        return [self.current_level, self.map_name[self.current_map]]
+        # Return level, map and algorithm
+        return [self.current_level, self.map_name[self.current_map], self.current_algorithm]
