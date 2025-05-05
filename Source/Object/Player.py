@@ -1,6 +1,6 @@
 import pygame
 
-from constants import SIZE_WALL, MARGIN
+from Source.Constants.constants import SIZE_WALL, MARGIN
 
 
 class Player:

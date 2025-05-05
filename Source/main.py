@@ -1,11 +1,11 @@
-from Algorithms.Ghost_Move import Ghost_move_A_star
-from Utils.Utils import *
-from Object.Player import *
-from Object.Wall import *
-from Object.Food import *
-from Object.Menu import *
+from Source.Algorithms.Ghost_Move import *
+from Source.Utils.Utils import *
+from Source.Object.Player import *
+from Source.Object.Wall import *
+from Source.Object.Food import *
+from Source.Object.Menu import *
 import random
-from Algorithms.SearchAgent import *
+from Source.Algorithms.SearchAgent import *
 
 # KHỞI TẠO CÁC BIẾN
 N = M = Score = _state_PacMan = 0

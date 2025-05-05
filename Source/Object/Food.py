@@ -1,6 +1,6 @@
 import pygame
 
-from constants import WHITE, SIZE_WALL, YELLOW, MARGIN
+from Source.Constants.constants import WHITE, SIZE_WALL, YELLOW, MARGIN
 
 
 class Food:

@@ -1,4 +1,4 @@
-from constants import FOOD, EMPTY, WALL
+from Source.Constants.constants import FOOD, EMPTY, WALL
 
 #          phải    trái     lên      xuống
 moving = [[0, 1], [0, -1], [1, 0], [-1, 0]]
@@ -44,7 +44,6 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
     # nearest_food là một tuple (index, [row, col])
     index, position = nearest_food
     food_row, food_col = position
-    index, food_row,food_col = nearest_food
     return [food_row, food_col, index]
 
 
