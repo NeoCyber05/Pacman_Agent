@@ -89,16 +89,16 @@ class Menu:
         button_width = 200
         button_spacing = 20
         total_width = 4 * button_width + 3 * button_spacing
-        start_x = (WIDTH - total_width) // 2
+        #start_x = (WIDTH - total_width) // 2
 
-        self.btnBFS = Button(start_x, HEIGHT // 2, button_width, 80, screen, "BFS",
+        self.btnBFS = Button(WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "BFS",
                              lambda: self._set_algorithm("BFS"))
-        self.btnLocalSearch = Button(start_x + button_width + button_spacing, HEIGHT // 2, button_width, 80, screen, "Local Search",
+        self.btnLocalSearch = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "Local Search",
                                     lambda: self._set_algorithm("Local Search"))
-        self.btnMinimax = Button(start_x + 2 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "Minimax",
+        self.btnMinimax = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "Minimax",
                                 lambda: self._set_algorithm("Minimax"))
-        self.btnRandom = Button(start_x + 3 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "Random",
-                               lambda: self._set_algorithm("Random"))
+        #self.btnMCTS = Button(start_x + 3 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "MCTS",
+        #                       lambda: self._set_algorithm("MCTS"))
 
         # Map navigation buttons
         self.btnPrev = Button(WIDTH // 2 - 250, HEIGHT // 4 * 3 + 35, 100, 100, screen, "<", self.prevMap)
@@ -150,7 +150,7 @@ class Menu:
         """Load maps for the current level"""
         self.map_name = []
         self.current_map = 0
-        level_dir = f'../Input/Mode{self.current_level}'
+        level_dir = f'../Map'
         for file in os.listdir(level_dir):
             self.map_name.append(f'{level_dir}/{file}')
 
@@ -267,7 +267,7 @@ class Menu:
                 self.btnBFS.process()
                 self.btnLocalSearch.process()
                 self.btnMinimax.process()
-                self.btnRandom.process()
+                #self.btnMCTS.process()
                 self.btnAlgoBack.process()
 
             elif self.current_screen == 3:

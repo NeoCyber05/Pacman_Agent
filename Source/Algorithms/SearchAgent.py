@@ -1,7 +1,6 @@
 from Algorithms.BFS import BFS
 from Algorithms.LocalSearch import *
 from Algorithms.AStar import *
-from Algorithms.MCTS import * # Thêm import
 from Algorithms.Minimax import *
 
 class SearchAgent:
@@ -22,5 +21,4 @@ class SearchAgent:
             return local_search(self.map, self.start_row, self.start_col, self.N, self.M, visited.copy())
         if ALGORITHMS == "Minimax":
             return minimaxAgent(self.map, self.start_row, self.start_col, self.N, self.M, depth, Score)
-        if ALGORITHMS == "MCTS":  # Thêm MCTS
-            return MCTS(self.map, self.food_Position, self.start_row, self.start_col, self.N, self.M, iterations)
+

@@ -14,14 +14,20 @@ def update_cost(_map, pos, current_pos, N, M, depth, visited, object_type, cost)
     point = 0
     if object_type == FOOD:
         if depth == 2 :
-            point = 35
+            point = 40
         elif depth == 1 :
-            point =10
+            point =15
         else:
             point =5
 
-    if object_type == MONSTER:
-        point = float("-inf") if depth > 0 else -100
+    elif object_type == MONSTER:
+        if depth == 2:
+            point = float("-inf")
+        if depth == 1:
+            point = float("-inf")
+        if depth == 0:
+            point = -100
+        #point = float("-inf") if depth > 0 else -100
 
     cost[current_row][current_col] += point
 

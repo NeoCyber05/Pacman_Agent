@@ -162,7 +162,7 @@ def startGame() -> None:
     done = False
     is_moving = False
     timer = 0
-    delay = 100
+    delay = 200
     status = 0
 
     while not done:
@@ -228,7 +228,7 @@ def startGame() -> None:
                                 _map[row_food][col_food] = EMPTY
                                 _food.pop(idx)
                                 _food_Position.pop(idx)
-                                Score += 20
+                                Score += 50
                                 break
                         new_PacMan_Pos = []
 
@@ -282,12 +282,9 @@ def startGame() -> None:
                 elif PacMan_Algorithm == "Minimax" and len(_food_Position) > 0:
                     new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=4, Score=Score)
 
-                elif PacMan_Algorithm == "Random" and len(_food_Position) > 0:
-                    new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
-
                 # If no valid move is found, use random movement
-                if len(_food_Position) > 0 and (not isinstance(new_PacMan_Pos, list) or len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
-                    new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
+                #if len(_food_Position) > 0 and (not isinstance(new_PacMan_Pos, list) or len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
+                #    new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
 
                 if isinstance(new_PacMan_Pos, list) and len(new_PacMan_Pos) > 0:
                     change_direction_PacMan(new_PacMan_Pos[0], new_PacMan_Pos[1])

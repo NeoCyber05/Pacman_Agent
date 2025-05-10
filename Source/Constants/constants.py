@@ -3,8 +3,7 @@ ALGORITHM: str = "MINIMAX"
 LEVEL_TO_ALGORITHM = {
     "LEVEL1": "BFS",
     "LEVEL2": "Local Search",
-    "LEVEL3": "MCTS",
-    "LEVEL4": "Minimax"
+    "LEVEL3": "Minimax"
 }
 
 # DEFINE COLOR
@@ -31,7 +30,7 @@ MONSTER = 3
 # Setup screen
 WIDTH: int = 1200
 HEIGHT: int = 600
-FPS: int = 300
+FPS: int = 200
 
 MARGIN = {
     "TOP": 0,
