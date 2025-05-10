@@ -245,12 +245,12 @@ def startGame() -> None:
                     is_moving = False
             else:
                 # Cập nhật vị trí của ma quái (based on level)
-                if Level == 3:
-                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=1)
-                elif Level == 4:
-                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=2)
+                if Level == 1:
+                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=0) # No Moving
+                elif Level == 2:
+                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=1) # Random
                 else:
-                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=0)
+                    _ghost_new_position = generate_Ghost_new_position(_ghost, _type=2) # A*
 
                 is_moving = True
                 timer = 0

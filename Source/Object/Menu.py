@@ -79,11 +79,11 @@ class Menu:
         # Level buttons
         self.btnLevel1 = Button(WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "No Moving",
                                 self._load_level_1)
-        #self.btnLevel2 = Button(2 * WIDTH // 5 - 100, HEIGHT // 2, 180, 100, screen, "Level 2",self._load_level_2)
+
         self.btnLevel2 = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "Random",
-                                self._load_level_3)
+                                self._load_level_2)
         self.btnLevel3 = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "A*",
-                                self._load_level_4)
+                                self._load_level_3)
 
         # Algorithm buttons
         button_width = 200
