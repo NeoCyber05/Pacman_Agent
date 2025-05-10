@@ -312,9 +312,9 @@ done_2 = False
 def handleEndGame(status: int):
     global done_2
     done_2 = False
-    bg = pygame.image.load("images/gameover_bg.png")
+    bg = pygame.image.load("images/Over_bg.jpg")
     bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
-    bg_w = pygame.image.load("images/win.jpg")
+    bg_w = pygame.image.load("images/win_bg.jpg")
     bg_w = pygame.transform.scale(bg_w, (WIDTH, HEIGHT))
 
     def clickContinue():
@@ -325,8 +325,8 @@ def handleEndGame(status: int):
         pygame.quit()
         sys.exit(0)
 
-    btnContinue = Button(WIDTH // 2 - 300, HEIGHT // 2 - 50, 200, 100, screen, "CONTINUE", clickContinue)
-    btnQuit = Button(WIDTH // 2 + 50, HEIGHT // 2 - 50, 200, 100, screen, "QUIT", clickQuit)
+    btnContinue = Button(WIDTH // 2 - 300, HEIGHT // 2 + 100, 200, 100, screen, "CONTINUE", clickContinue)
+    btnQuit = Button(WIDTH // 2 + 90, HEIGHT // 2 + 100, 200, 100, screen, "QUIT", clickQuit)
 
     delay = 100
     while not done_2:

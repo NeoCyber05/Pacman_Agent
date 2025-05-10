@@ -2,18 +2,29 @@ import os
 import sys
 
 import pygame
+from pygments.styles.rainbow_dash import BLUE_LIGHT
+
 from Source.Constants.constants import *
 
 clock = pygame.time.Clock()
-bg = pygame.image.load("images/home_bg.png")
+bg = pygame.image.load("images/intro_bg.png")
 bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
 pygame.init()
-font = pygame.font.SysFont('Arial', 40)
-my_font = pygame.font.SysFont('Comic Sans MS', 70)
+font = pygame.font.SysFont('Arial', 30)
+my_font = pygame.font.SysFont('Impact', 45)
+
+#'Impact' - Bold and clear, great for arcade-style games
+#'Verdana' - Clean and legible at various sizes
+#'Consolas' or 'Courier New' - For a retro arcade feel
+
 
 _N = _M = 0
 __map = 0
 SIZE_WALL = 20
+
+menu_bg = pygame.image.load("images/ghost_level_bg.png")  # Create this image
+menu_bg = pygame.transform.scale(menu_bg, (WIDTH, HEIGHT))
+
 
 
 class Button:
@@ -26,9 +37,9 @@ class Button:
         self.screen = screen
 
         self.fillColors = {
-            'normal': '#FF4500',
-            'hover': '#FF6347',
-            'pressed': '#FF7F50',
+            'normal': '#3498db',  # Blue
+            'hover': '#2980b9',  # Darker blue
+            'pressed': '#1f618d',  # Even darker blue
         }
 
         self.buttonSurface = pygame.Surface((self.width, self.height))
@@ -66,12 +77,12 @@ class Menu:
         self.btnStart = Button(WIDTH // 2 - 100 + 5, HEIGHT - 170, 200, 100, screen, "Start", self.myFunction)
 
         # Level buttons
-        self.btnLevel1 = Button(WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "No Monster",
+        self.btnLevel1 = Button(WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "No Moving",
                                 self._load_level_1)
         #self.btnLevel2 = Button(2 * WIDTH // 5 - 100, HEIGHT // 2, 180, 100, screen, "Level 2",self._load_level_2)
-        self.btnLevel3 = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "Random",
+        self.btnLevel2 = Button(2 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "Random",
                                 self._load_level_3)
-        self.btnLevel4 = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "A*",
+        self.btnLevel3 = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, 180, 100, screen, "A*",
                                 self._load_level_4)
 
         # Algorithm buttons
@@ -240,19 +251,19 @@ class Menu:
 
             elif self.current_screen == 2:
                 # Level selection
-                self.screen.fill(BLACK)
-                text_surface = my_font.render('Select Ghost Level', False, GREEN)
-                self.screen.blit(text_surface, (WIDTH // 2 - 250, 10))
+                self.screen.blit(menu_bg, (0, 0))
+                text_surface = my_font.render('SELECT GHOST MOVE', False, BLUE_LIGHT)
+                self.screen.blit(text_surface, (WIDTH // 3 , 5))
                 self.btnLevel1.process()
                 #self.btnLevel2.process()
+                self.btnLevel2.process()
                 self.btnLevel3.process()
-                self.btnLevel4.process()
 
             elif self.current_screen == 5:
                 # Algorithm selection (new screen)
-                self.screen.fill(BLACK)
-                text_surface = my_font.render('Select PacMan Algorithm', False, GREEN)
-                self.screen.blit(text_surface, (WIDTH // 2 - 300, 10))
+                self.screen.blit(menu_bg, (0, 0))
+                text_surface = my_font.render('SELECT PACMAN ALGORITHMS', False, BLUE_LIGHT)
+                self.screen.blit(text_surface, (WIDTH // 3 -20 , 5))
                 self.btnBFS.process()
                 self.btnLocalSearch.process()
                 self.btnMinimax.process()

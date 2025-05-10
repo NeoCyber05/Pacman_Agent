@@ -34,7 +34,6 @@ def find_nearest_food(food_positions: list[list[int]], start_row: int, start_col
     def distance_to_food(food):
         index, position = food
         food_row, food_col = position
-        index, row,col = food
         distance = Manhattan(food_row, food_col, start_row, start_col)
         return distance
 
