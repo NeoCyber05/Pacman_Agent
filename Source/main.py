@@ -6,7 +6,7 @@ from Source.Object.Food import *
 from Source.Object.Menu import *
 import random
 from Source.Algorithms.SearchAgent import *
-
+import pygame
 # KHỞI TẠO CÁC BIẾN
 N = M = Score = _state_PacMan = 0
 _map = []
@@ -162,7 +162,7 @@ def startGame() -> None:
     done = False
     is_moving = False
     timer = 0
-    delay = 200
+    delay = 100
     status = 0
 
     while not done:
@@ -265,14 +265,22 @@ def startGame() -> None:
 
                 # Handle different algorithms based on user selection
                 if PacMan_Algorithm == "BFS":
-                    if len(result) <= 0:
+                    # Recalculate path when result is empty OR food was just eaten
+                    food_eaten = False
+                    for idx in range(len(_food)):
+                        row_food, col_food = _food[idx].getRC()
+                        if row_food == PacMan.getRC()[0] and col_food == PacMan.getRC()[1]:
+                            food_eaten = True
+                            break
+
+                    if len(result) <= 0 or food_eaten:
                         result = search.execute(ALGORITHMS="BFS")
                         if len(result) > 0:
-                            result.pop(0)
-                            if len(result) > 0:
-                                new_PacMan_Pos = result[0]
-                    elif len(result) > 1:
+                            result.pop(0)  # Remove current position
+                    elif len(result) > 0:
                         result.pop(0)
+
+                    if len(result) > 0:
                         new_PacMan_Pos = result[0]
 
                 elif PacMan_Algorithm == "Local Search" and len(_food_Position) > 0:
@@ -280,11 +288,11 @@ def startGame() -> None:
                     _visited[row][col] += 1
 
                 elif PacMan_Algorithm == "Minimax" and len(_food_Position) > 0:
-                    new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=4, Score=Score)
+                    new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=5, Score=Score)
 
-                # If no valid move is found, use random movement
-                #if len(_food_Position) > 0 and (not isinstance(new_PacMan_Pos, list) or len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
-                #    new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
+                #If no valid move is found, use random movement
+                if len(_food_Position) > 0 and (not isinstance(new_PacMan_Pos, list) or len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
+                    new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
 
                 if isinstance(new_PacMan_Pos, list) and len(new_PacMan_Pos) > 0:
                     change_direction_PacMan(new_PacMan_Pos[0], new_PacMan_Pos[1])

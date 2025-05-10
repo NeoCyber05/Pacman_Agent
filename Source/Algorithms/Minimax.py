@@ -1,6 +1,6 @@
 from Utils.Utils import *
 from Constants.constants import *
-
+import pygame
 _food_pos = []
 
 
@@ -39,10 +39,14 @@ def evaluationFunction(_map, pac_row, pac_col, N, M, score):
 
 
 def minimaxAgent(_map, pac_row, pac_col, N, M, depth, Score):
+    start_time = pygame.time.get_ticks()
+    MAX_TIME = 300 #Tránh endless loop
+
     def terminal(_map, _pac_row, _pac_col, _N, _M, _depth) -> bool:
         if _map[_pac_row][_pac_col] == MONSTER or _depth == 0:
             return True
-
+        if pygame.time.get_ticks() - start_time > MAX_TIME:
+            return True
         for row in range(_N):
             for col in range(_M):
                 if _map[row][col] == FOOD:
