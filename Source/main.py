@@ -1,5 +1,4 @@
 from Source.Algorithms.Ghost_Move import *
-from Source.Utils.Utils import *
 from Source.Object.Player import *
 from Source.Object.Wall import *
 from Source.Object.Food import *
@@ -28,7 +27,7 @@ pygame.display.set_caption('PacMan AI')
 clock = pygame.time.Clock()
 
 pygame.font.init()
-my_font = pygame.font.SysFont('Contrail One', 30)    #Score lúc game run
+my_font = pygame.font.SysFont('Impact' ,50)    #Score lúc game run
 my_font_2 = pygame.font.SysFont('Contrail One', 100) #Your Score ( Hiện lúc end game)
 
 def readMapInFile(map_name: str):
@@ -93,7 +92,7 @@ def Draw(_screen) -> None:
     PacMan.draw(_screen)
 
     text_surface = my_font.render(f'Score: {Score}', False, RED)
-    screen.blit(text_surface, (0, 0))
+    screen.blit(text_surface, (WIDTH - text_surface.get_width() - 10, 10))
 
 # 1: Random, 2: A*
 def generate_Ghost_new_position(_ghost, _type: int = 0) -> list[list[int]]:

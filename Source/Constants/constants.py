@@ -17,7 +17,7 @@ YELLOW = (255, 255, 0)
 ORANGE = (255, 165, 0)
 
 # DEFINE MAP
-SIZE_WALL: int = 30
+SIZE_WALL: int = 40
 DEFINE_WIDTH: int = 6
 BLOCK_SIZE: int = SIZE_WALL // 2
 
