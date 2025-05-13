@@ -1,11 +1,14 @@
-from Algorithms.Ghost_Move import *
-from Object.Player import *
-from Object.Wall import *
-from Object.Food import *
-from Object.Menu import *
+from Source.Algorithms.Ghost_Move import Ghost_move_A_star
+from Source.Object.Player import Player
+from Source.Object.Wall import Wall
+from Source.Object.Food import Food
+from Source.Object.Menu import Menu,Button
 import random
-from Algorithms.SearchAgent import *
+from Source.Algorithms.SearchAgent import SearchAgent
 import pygame
+from Utils.Utils import moving , isWall
+import sys
+from Source.Constants.constants import *
 # KHỞI TẠO CÁC BIẾN    -
 N = M = Score = _state_PacMan = 0
 _map = []
@@ -19,7 +22,7 @@ _visited = []
 PacMan: Player
 Level = 1
 Map_name = ""
-
+PacMan_Algorithm = "Minimax"
 
 # KHỞI TẠO PYGAME
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -56,6 +59,7 @@ def readMapInFile(map_name: str):
 
     f.close()
 
+
 def check_Object(_map, row, col):
     if _map[row][col] == WALL:
         _wall.append(Wall(row, col, BLUE))
@@ -83,6 +87,7 @@ def initData() -> None:
     for row in range(N):
         for col in range(M):
             check_Object(_map, row, col)
+
 
 def Draw(_screen) -> None:
     for obj_list in [_wall, _road, _food, _ghost]:
@@ -197,14 +202,14 @@ def startGame() -> None:
 
                             # Check va chạm với thức ăn
                             for index in range(len(_food)):
-                                row_food, col_food = _food[index].getRC()
+                                [row_food, col_food]= _food[index].getRC()
                                 if row_food == old_row_Gho and col_food == old_col_Gho:
                                     _map[row_food][col_food] = FOOD
 
                 # Move PacMan
                 if len(new_PacMan_Pos) > 0:
-                    old_row_Pac, old_col_Pac = PacMan.getRC()
-                    new_row_Pac, new_col_Pac = new_PacMan_Pos
+                    [old_row_Pac, old_col_Pac] = PacMan.getRC()
+                    [new_row_Pac, new_col_Pac]= new_PacMan_Pos
 
                     if old_row_Pac < new_row_Pac:
                         PacMan.move(1, 0)
@@ -222,7 +227,7 @@ def startGame() -> None:
 
                         # Check va chạm với thức ăn
                         for idx in range(len(_food)):
-                            row_food, col_food = _food[idx].getRC()
+                            [row_food, col_food] = _food[idx].getRC()
                             if row_food == new_row_Pac and col_food == new_col_Pac:
                                 _map[row_food][col_food] = EMPTY
                                 _food.pop(idx)
@@ -290,10 +295,10 @@ def startGame() -> None:
                     new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=5, Score=Score)
 
                 #If no valid move is found, use random movement
-                if len(_food_Position) > 0 and (not isinstance(new_PacMan_Pos, list) or len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
+                if len(_food_Position) > 0 and (len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
                     new_PacMan_Pos = randomPacManNewPos(_map, row, col, N, M)
 
-                if isinstance(new_PacMan_Pos, list) and len(new_PacMan_Pos) > 0:
+                if len(new_PacMan_Pos) > 0:
                     change_direction_PacMan(new_PacMan_Pos[0], new_PacMan_Pos[1])
                     if check_collision_ghost(_ghost, new_PacMan_Pos[0], new_PacMan_Pos[1]):
                         pac_can_move = False
@@ -360,13 +365,7 @@ def handleEndGame(status: int):
 
     showMenu()
 
-'''
-def showMenu():
-    _menu = Menu(screen)
-    global Level, Map_name
-    [Level, Map_name] = _menu.run()
-    startGame()
-'''
+
 
 def showMenu():
     _menu = Menu(screen)

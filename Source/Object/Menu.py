@@ -2,10 +2,10 @@ import os
 import sys
 
 import pygame
-from pygments.styles.rainbow_dash import BLUE_LIGHT
 
 from Source.Constants.constants import *
 
+BLUE_LIGHT = (135, 206, 250)
 clock = pygame.time.Clock()
 bg = pygame.image.load("images/intro_bg.png")
 bg = pygame.transform.scale(bg, (WIDTH, HEIGHT))
@@ -87,9 +87,8 @@ class Menu:
 
         # Algorithm buttons
         button_width = 200
-        button_spacing = 20
-        total_width = 4 * button_width + 3 * button_spacing
-        #start_x = (WIDTH - total_width) // 2
+
+
 
         self.btnBFS = Button(WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "BFS",
                              lambda: self._set_algorithm("BFS"))
@@ -179,10 +178,8 @@ class Menu:
         self.clicked = False
 
     def selectMap(self):
-        """Select the current map and finish"""
-        if self.clicked and len(self.map_name) > 0:
+        if self.clicked:
             self.done = True
-        self.clicked = False
 
     def draw_map(self, map_path):
        # text_surface = my_font.render(

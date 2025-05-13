@@ -1,6 +1,6 @@
 from Utils.Utils import *
 from Constants.constants import *
-import pygame
+
 _food_pos = []
 
 
@@ -39,15 +39,6 @@ def evaluationFunction(_map, pac_row, pac_col, N, M, score):
 
 
 def minimaxAgent(_map, pac_row, pac_col, N, M, depth, Score):
-    def terminal(_map, _pac_row, _pac_col, _N, _M, _depth) -> bool:
-        if _map[_pac_row][_pac_col] == MONSTER or _depth == 0:
-            return True
-        for row in range(_N):
-            for col in range(_M):
-                if _map[row][col] == FOOD:
-                    return False
-        return True
-
     def min_value(_map, _pac_row, _pac_col, _N, _M, _depth, score):
         if terminal(_map, _pac_row, _pac_col, _N, _M, _depth):
             return evaluationFunction(_map, _pac_row, _pac_col, _N, _M, score)
@@ -121,3 +112,14 @@ def minimaxAgent(_map, pac_row, pac_col, N, M, depth, Score):
     if len(res) > 0:
         return res[-1][0]
     return []
+
+def terminal(_map, _pac_row, _pac_col, _N, _M, _depth) -> bool:
+        if _map[_pac_row][_pac_col] == MONSTER or _depth == 0:
+            return True
+
+        for row in range(_N):
+            for col in range(_M):
+                if _map[row][col] == FOOD:
+                    return False
+
+        return True
