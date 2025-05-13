@@ -355,7 +355,9 @@ def handleEndGame(status: int):
             continue
 
         if status == -1:
+            text_surface = my_font_2.render('You lost!! Your Score: {Score}'.format(Score=Score), False, RED)
             screen.blit(bg, (0, 0))
+            screen.blit(text_surface, (WIDTH // 4 - 65, 10))
         else:
             screen.blit(bg_w, (0, 0))
             text_surface = my_font_2.render('Your Score: {Score}'.format(Score=Score), False, RED)
