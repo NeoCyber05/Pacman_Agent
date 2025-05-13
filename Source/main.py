@@ -1,12 +1,12 @@
-from Source.Algorithms.Ghost_Move import *
-from Source.Object.Player import *
-from Source.Object.Wall import *
-from Source.Object.Food import *
-from Source.Object.Menu import *
+from Algorithms.Ghost_Move import *
+from Object.Player import *
+from Object.Wall import *
+from Object.Food import *
+from Object.Menu import *
 import random
-from Source.Algorithms.SearchAgent import *
+from Algorithms.SearchAgent import *
 import pygame
-# KHỞI TẠO CÁC BIẾN
+# KHỞI TẠO CÁC BIẾN    -
 N = M = Score = _state_PacMan = 0
 _map = []
 _wall = []
