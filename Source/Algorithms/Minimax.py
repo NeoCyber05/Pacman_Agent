@@ -39,24 +39,6 @@ def evaluationFunction(_map, pac_row, pac_col, N, M, score):
 
 
 def minimaxAgent(_map, pac_row, pac_col, N, M, depth, Score):
-    def min_value(_map, _pac_row, _pac_col, _N, _M, _depth, score):
-        if terminal(_map, _pac_row, _pac_col, _N, _M, _depth):
-            return evaluationFunction(_map, _pac_row, _pac_col, _N, _M, score)
-
-        v = 10000000000000000
-        for row in range(_N):
-            for col in range(_M):
-                if _map[row][col] == MONSTER:
-                    for [_d_r, _d_c] in moving:
-                        _new_r, _new_c = _d_r + row, _d_c + col
-                        if isWall(_map, _new_r, _new_c, _N, _M):
-                            state = _map[_new_r][_new_c]
-                            _map[_new_r][_new_c] = MONSTER
-                            _map[row][col] = EMPTY
-                            v = min(v, max_value(_map, _pac_row, _pac_col, _N, _M, _depth - 1, score))
-                            _map[_new_r][_new_c] = state
-                            _map[row][col] = MONSTER
-        return v
 
     def max_value(_map, _pac_row, _pac_col, _N, _M, _depth, score):
         if terminal(_map, _pac_row, _pac_col, _N, _M, _depth):
@@ -81,6 +63,26 @@ def minimaxAgent(_map, pac_row, pac_col, N, M, depth, Score):
                 else:
                     score += 1
         return v
+
+    def min_value(_map, _pac_row, _pac_col, _N, _M, _depth, score):
+        if terminal(_map, _pac_row, _pac_col, _N, _M, _depth):
+            return evaluationFunction(_map, _pac_row, _pac_col, _N, _M, score)
+
+        v = 10000000000000000
+        for row in range(_N):
+            for col in range(_M):
+                if _map[row][col] == MONSTER:
+                    for [_d_r, _d_c] in moving:
+                        _new_r, _new_c = _d_r + row, _d_c + col
+                        if isWall(_map, _new_r, _new_c, _N, _M):
+                            state = _map[_new_r][_new_c]
+                            _map[_new_r][_new_c] = MONSTER
+                            _map[row][col] = EMPTY
+                            v = min(v, max_value(_map, _pac_row, _pac_col, _N, _M, _depth - 1, score))
+                            _map[_new_r][_new_c] = state
+                            _map[row][col] = MONSTER
+        return v
+
 
     res = []
     global _food_pos

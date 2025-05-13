@@ -72,7 +72,8 @@ def check_Object(_map, row, col):
 
 def initData() -> None:
     global N, M, _map, _food_Position, _food, _road, _wall, _ghost, _visited, Score, _state_PacMan, _ghost_Position
-    N = M = Score = _state_PacMan = 0
+    N = M =  _state_PacMan = 0
+    Score = 10
     _map = []
     _wall = []
     _road = []
@@ -232,19 +233,22 @@ def startGame() -> None:
                                 _map[row_food][col_food] = EMPTY
                                 _food.pop(idx)
                                 _food_Position.pop(idx)
-                                Score += 50
+                                Score += 30
                                 break
                         new_PacMan_Pos = []
 
-                if check_collision_ghost(_ghost):
+                if check_collision_ghost(_ghost): # Chạm Ma => LOST
                     pac_can_move = False
                     done = True
                     status = -1
 
-                if len(_food_Position) == 0:
+                if len(_food_Position) == 0:# Hết food => win
                     status = 1
                     done = True
-
+                if Score == -15 :  # Score = -15  => LOST
+                    pac_can_move = False
+                    done = True
+                    status = -1
                 if timer >= SIZE_WALL:
                     is_moving = False
             else:
