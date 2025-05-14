@@ -1,6 +1,6 @@
 import pygame
 
-from Source.Constants.constants import WHITE, SIZE_WALL, YELLOW, MARGIN
+from Source.Constants.constants import  *
 
 
 class Food:
@@ -32,7 +32,7 @@ class Food:
         self.rect.top = row * SIZE_WALL + MARGIN["TOP"]
         self.rect.left = col * SIZE_WALL + MARGIN["LEFT"]
         # Điều chỉnh vị trí cho thức ăn lớn (màu vàng) để căn giữa
-        if color == YELLOW:
+        if color == FOOD_ORANGE:
             self.rect.top += SIZE_WALL // 2 - height // 2
             self.rect.left += SIZE_WALL // 2 - width // 2
 

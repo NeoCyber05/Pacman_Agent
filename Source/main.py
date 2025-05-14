@@ -62,9 +62,9 @@ def readMapInFile(map_name: str):
 
 def check_Object(_map, row, col):
     if _map[row][col] == WALL:
-        _wall.append(Wall(row, col, BLUE))
+        _wall.append(Wall(row, col, WALL_ELECTRIC_BLUE))
     if _map[row][col] == FOOD:
-        _food.append(Food(row, col, BLOCK_SIZE, BLOCK_SIZE, YELLOW))
+        _food.append(Food(row, col, BLOCK_SIZE, BLOCK_SIZE, FOOD_ORANGE))
         _food_Position.append([row, col])
     if _map[row][col] == MONSTER:
         _ghost.append(Player(row, col, IMAGE_GHOST[len(_ghost) % len(IMAGE_GHOST)]))

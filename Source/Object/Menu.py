@@ -57,7 +57,7 @@ class Button:
             self.buttonRect.width / 2 - self.buttonSurf.get_rect().width / 2,
             self.buttonRect.height / 2 - self.buttonSurf.get_rect().height / 2
         ])
-        pygame.draw.rect(self.buttonSurface, BLUE, (0, 0, self.width, self.height), 5)
+        pygame.draw.rect(self.buttonSurface, WALL_DEEP_BLUE, (0, 0, self.width, self.height), 5)
         self.screen.blit(self.buttonSurface, self.buttonRect)
 
 
@@ -192,7 +192,7 @@ class Menu:
                 cell = int(line[j])
                 if cell == WALL:
                     image = pygame.Surface([SIZE_WALL, SIZE_WALL])
-                    pygame.draw.rect(image, BLUE, (0, 0, SIZE_WALL, SIZE_WALL), 1)
+                    pygame.draw.rect(image,WALL_ELECTRIC_BLUE, (0, 0, SIZE_WALL, SIZE_WALL), 1)
                     top = i * SIZE_WALL + MARGIN_TOP
                     left = j * SIZE_WALL + MARGIN_LEFT
                     self.screen.blit(image, (left, top))
@@ -200,7 +200,7 @@ class Menu:
                     image = pygame.Surface([SIZE_WALL // 2, SIZE_WALL // 2])
                     image.fill(WHITE)
                     image.set_colorkey(WHITE)
-                    pygame.draw.ellipse(image, YELLOW, [0, 0, SIZE_WALL // 2, SIZE_WALL // 2])
+                    pygame.draw.ellipse(image, FOOD_ORANGE, [0, 0, SIZE_WALL // 2, SIZE_WALL // 2])
 
                     top = i * SIZE_WALL + MARGIN_TOP + SIZE_WALL // 2 - SIZE_WALL // 4
                     left = j * SIZE_WALL + MARGIN_LEFT + SIZE_WALL // 2 - SIZE_WALL // 4
