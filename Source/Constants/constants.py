@@ -28,8 +28,8 @@ FOOD = 2
 MONSTER = 3
 
 # Setup screen
-WIDTH: int = 1200
-HEIGHT: int = 600
+WIDTH: int = 800
+HEIGHT: int = 800
 FPS: int = 300
 
 MARGIN = {
