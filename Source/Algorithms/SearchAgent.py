@@ -20,5 +20,5 @@ class SearchAgent:
         if ALGORITHMS == "Local Search":
             return local_search(self.map, self.start_row, self.start_col, self.N, self.M, visited.copy())
         if ALGORITHMS == "Minimax":
-            return AlphaBetaAgent(self.map, self.start_row, self.start_col, self.N, self.M, depth, Score)
+            return minimaxAgent(self.map, self.start_row, self.start_col, self.N, self.M, depth, Score)
 
