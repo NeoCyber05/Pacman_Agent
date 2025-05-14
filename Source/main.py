@@ -103,24 +103,29 @@ def Draw(_screen) -> None:
 # 1: Random, 2: A*
 def generate_Ghost_new_position(_ghost, _type: int = 0) -> list[list[int]]:
     _ghost_new_position = []
-    if _type == 1:#RANDOM
+    # Keep track of positions that are already assigned to ghosts
+    occupied_positions = []
+
+    if _type == 1:  # RANDOM
         for idx in range(len(_ghost)):
             [row, col] = _ghost[idx].getRC()
-
-            rnd = random.randint(0, 3)
-            new_row, new_col = row + moving[rnd][0], col + moving[rnd][1]
-            while not isWall(_map, new_row, new_col, N, M):
-                rnd = random.randint(0, 3)
-                new_row, new_col = row + moving[rnd][0], col + moving[rnd][1]
-
-            _ghost_new_position.append([new_row, new_col])
-
+            current_pos = [row, col]  # Current ghost position
     # update latest
-    elif _type == 2:# A*
+    elif _type == 2:  # A*
         for idx in range(len(_ghost)):
             [start_row, start_col] = _ghost[idx].getRC()
+            current_pos = [start_row, start_col]  # Current ghost position
             [end_row, end_col] = PacMan.getRC()
-            _ghost_new_position.append(Ghost_move_A_star(_map, start_row, start_col, end_row, end_col, N, M))
+
+            # Get A* path
+            new_pos = Ghost_move_A_star(_map, start_row, start_col, end_row, end_col, N, M)
+            # Check if position is already occupied
+            if new_pos in occupied_positions:
+                # If collision would occur, keep ghost at current position
+                _ghost_new_position.append(current_pos)
+            else:
+                _ghost_new_position.append(new_pos)
+                occupied_positions.append(new_pos)
 
     return _ghost_new_position
 
