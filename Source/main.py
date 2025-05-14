@@ -105,12 +105,17 @@ def generate_Ghost_new_position(_ghost, _type: int = 0) -> list[list[int]]:
     _ghost_new_position = []
     # Keep track of positions that are already assigned to ghosts
     occupied_positions = []
-
-    if _type == 1:  # RANDOM
+    if _type == 1:
         for idx in range(len(_ghost)):
             [row, col] = _ghost[idx].getRC()
-            current_pos = [row, col]  # Current ghost position
-    # update latest
+
+            rnd = random.randint(0, 3)
+            new_row, new_col = row + moving[rnd][0], col + moving[rnd][1]
+            while not isWall(_map, new_row, new_col, N, M):
+                rnd = random.randint(0, 3)
+                new_row, new_col = row + moving[rnd][0], col + moving[rnd][1]
+
+            _ghost_new_position.append([new_row, new_col])
     elif _type == 2:  # A*
         for idx in range(len(_ghost)):
             [start_row, start_col] = _ghost[idx].getRC()
