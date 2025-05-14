@@ -167,7 +167,7 @@ def startGame() -> None:
     done = False
     is_moving = False
     timer = 0
-    delay = 100
+    delay = 50
     status = 0
 
     while not done:
@@ -296,7 +296,7 @@ def startGame() -> None:
                     _visited[row][col] += 1
 
                 elif PacMan_Algorithm == "Minimax" and len(_food_Position) > 0:
-                    new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=5, Score=Score)
+                    new_PacMan_Pos = search.execute(ALGORITHMS="Minimax", depth=4, Score=Score)
 
                 #If no valid move is found, use random movement
                 if len(_food_Position) > 0 and (len(new_PacMan_Pos) == 0 or [row, col] == new_PacMan_Pos):
@@ -341,7 +341,7 @@ def handleEndGame(status: int):
     btnContinue = Button(WIDTH // 2 - 300, HEIGHT // 2 + 100, 200, 100, screen, "CONTINUE", clickContinue)
     btnQuit = Button(WIDTH // 2 + 90, HEIGHT // 2 + 100, 200, 100, screen, "QUIT", clickQuit)
 
-    delay = 100
+    delay = 50
     while not done_2:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

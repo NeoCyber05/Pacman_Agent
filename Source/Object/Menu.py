@@ -13,9 +13,6 @@ pygame.init()
 font = pygame.font.SysFont('Arial', 30)
 my_font = pygame.font.SysFont('Impact', 45)
 
-#'Impact' - Bold and clear, great for arcade-style games
-#'Verdana' - Clean and legible at various sizes
-#'Consolas' or 'Courier New' - For a retro arcade feel
 
 
 _N = _M = 0
@@ -96,8 +93,6 @@ class Menu:
                                     lambda: self._set_algorithm("Local Search"))
         self.btnMinimax = Button(3 * WIDTH // 4 - 100, HEIGHT // 2, button_width, 80, screen, "Minimax",
                                 lambda: self._set_algorithm("Minimax"))
-        #self.btnMCTS = Button(start_x + 3 * (button_width + button_spacing), HEIGHT // 2, button_width, 80, screen, "MCTS",
-        #                       lambda: self._set_algorithm("MCTS"))
 
         # Map navigation buttons
         self.btnPrev = Button(WIDTH // 2 - 250, HEIGHT // 4 * 3 + 35, 100, 100, screen, "<", self.prevMap)
@@ -182,9 +177,6 @@ class Menu:
             self.done = True
 
     def draw_map(self, map_path):
-       # text_surface = my_font.render(
-       #     f'LEVEL {self.current_level} - MAP {self.current_map + 1} - {self.current_algorithm}',     False, GREEN)
-       #self.screen.blit(text_surface, (WIDTH // 2 - 270, 0))
 
         f = open(map_path, "r")
         x = f.readline().split()
