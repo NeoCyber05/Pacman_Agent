@@ -13,7 +13,7 @@ def Ghost_move_A_star(_map, start_row, start_col, end_row, end_col, N, M):
     start = (start_row, start_col)
     end = (end_row, end_col)
 
-    cost[(start_row, start_col)] = 0
+    cost[start] = 0
     queue.put((Manhattan(start_row, start_col, end_row, end_col), start))
 
     while not queue.empty():
