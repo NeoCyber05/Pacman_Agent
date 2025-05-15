@@ -12,7 +12,7 @@ class SearchAgent:
         self.N = N
         self.M = M
 
-    def execute(self, ALGORITHMS, visited=None, depth=5, Score=0):
+    def execute(self, ALGORITHMS, visited=None, depth=4, Score=0):
         if ALGORITHMS == "BFS":
             return BFS(self.map, self.food_Position, self.start_row, self.start_col, self.N, self.M)
         if ALGORITHMS == "A*":
