@@ -267,9 +267,15 @@ class Menu:
 
             elif self.current_screen == 4:
                 # Map navigation
-                text = f'LEVEL {self.current_level} - {self.current_algorithm}'
+                if self.current_level == 1:
+                    X= 'No Moving'
+                elif self.current_level == 2:
+                    X= 'Random Move'
+                else :
+                    X= 'A* Move'
+                text = f'{X} - {self.current_algorithm}'
                 text_surface = my_font.render(text, False, GREEN)
-                self.screen.blit(text_surface, (WIDTH // 2 - 270, 0))
+                self.screen.blit(text_surface, (WIDTH // 2 - 200, 0))
                 self.btnNext.process()
                 self.btnPrev.process()
                 self.btnPlay.process()
