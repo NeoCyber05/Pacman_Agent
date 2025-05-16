@@ -243,7 +243,7 @@ def startGame() -> None:
                                 _map[row_food][col_food] = EMPTY
                                 _food.pop(idx)
                                 _food_Position.pop(idx)
-                                Score += 30
+                                Score += 50
                                 break
                         new_PacMan_Pos = []
 
