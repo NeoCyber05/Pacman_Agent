@@ -1,6 +1,6 @@
 # 🎮 Pac-Man AI Agent
 
-Project Intro to AI : Đánh giá và kiểm thử thuật toán cho tác tử Pacman.
+Project Intro to AI - IT3160 : Đánh giá và kiểm thử thuật toán cho tác tử Pacman.<br>
 Project được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán Search AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
 
 ## 📋 Mục lục
@@ -118,19 +118,32 @@ Pacman_Agent/
 ```
 
 ## Giao diện Game
+
 **Màn hình khởi tạo:**
-![Màn hình khởi tạo](Demo/Start.jpg)
+
+<img src="Demo/Start.jpg" alt="Màn hình khởi tạo" width="400">
 
 **Màn hình chọn Ghost Move:**
-![Màn hình chọn Ghost Move](Demo/select_ghost.jpg)
+
+<img src="Demo/select_ghost.jpg" alt="Màn hình chọn Ghost Move" width="400">
 
 **Màn hình chọn Pacman Move:**
-![Màn hình chọn Pacman Move](Demo/select_pacman.jpg)
+
+<img src="Demo/select_pacman.jpg" alt="Màn hình chọn Pacman Move" width="400">
+
+**Màn hình chọn thuật toán:**
+<div align="center">
+  <img src="Demo/select_ghost.jpg" alt="Chọn Ghost Move" width="350" style="margin: 5px;">
+  <img src="Demo/select_pacman.jpg" alt="Chọn Pacman Move" width="350" style="margin: 5px;">
+</div>
 
 **Màn hình 5 map:**
-![Màn hình 5 map](Demo/demo_map.jpg)
+
+<img src="Demo/demo_map.jpg" alt="Màn hình 5 map" width="400">
+
 **Background kết thúc:**
-![Màn hình 5 map](Source/Images/Over_bg.jpg)
+
+<img src="Source/Images/Over_bg.jpg" alt="Background kết thúc" width="350">
 
 > **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
 
