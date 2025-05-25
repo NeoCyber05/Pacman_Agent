@@ -123,17 +123,9 @@ Pacman_Agent/
 
 <img src="Demo/Start.jpg" alt="Màn hình khởi tạo" width="400">
 
-**Màn hình chọn Ghost Move:**
-
-<img src="Demo/select_ghost.jpg" alt="Màn hình chọn Ghost Move" width="400">
-
-**Màn hình chọn Pacman Move:**
-
-<img src="Demo/select_pacman.jpg" alt="Màn hình chọn Pacman Move" width="400">
-
 **Màn hình chọn thuật toán:**
 <div align="center">
-  <img src="Demo/select_ghost.jpg" alt="Chọn Ghost Move" width="350" style="margin: 5px;">
+  <img src="Demo/select_ghost.jpg" alt="Chọn Ghost Move" width="420" style="margin: 5px;">
   <img src="Demo/select_pacman.jpg" alt="Chọn Pacman Move" width="350" style="margin: 5px;">
 </div>
 
@@ -143,7 +135,7 @@ Pacman_Agent/
 
 **Background kết thúc:**
 
-<img src="Source/Images/Over_bg.jpg" alt="Background kết thúc" width="350">
+<img src="Source/Images/Over_bg.jpg" alt="Background kết thúc" width="300">
 
 > **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
 
