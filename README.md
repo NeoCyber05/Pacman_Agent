@@ -1,6 +1,6 @@
 # 🎮 Pac-Man AI Agent
 
-Một dự án game Pac-Man với AI Agent được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
+Project Intro to AI : Pac-Man với AI Agent được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán Search AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
 
 ## 📋 Mục lục
 - [Tính năng chính](#-tính-năng-chính)
@@ -10,37 +10,36 @@ Một dự án game Pac-Man với AI Agent được phát triển bằng Python 
 - [Cấu trúc dự án](#-cấu-trúc-dự-án)
 - [Cấu hình map](#-cấu-hình-map)
 - [Hình ảnh minh họa](#-hình-ảnh-minh-họa)
+- [GamePlay](#-gameplay)
 - [Báo cáo](#-báo-cáo)
 - [Đóng góp](#-đóng-góp)
 
 ## 🚀 Tính năng chính
 
 - **Game Pac-Man hoàn chỉnh**: Giao diện đồ họa với Pygame
-- **AI Agent thông minh**: Pac-Man tự động di chuyển dựa trên thuật toán AI
+- **AI Agent thông minh**: Pac-Man tự động di chuyển dựa trên thuật toán được chọn
 - **Nhiều thuật toán AI**: BFS, Local Search, Minimax
-- **Hệ thống ma quái**: Ma quái di chuyển bằng thuật toán A*
-- **Nhiều map**: 5 map khác nhau với độ khó tăng dần
+- **Ghost Move**: Ma quái di chuyển bằng thuật toán No moving/ Random/ A* 
+- **Nhiều map**: 5 map với địa hình khác nhau
 - **Hệ thống điểm số**: Theo dõi điểm số trong game
-- **Menu tương tác**: Giao diện menu để chọn map và thuật toán
+- **Menu tương tác**: Giao diện menu để chọn map và thuật toán cho Pacman và Ghost
 
 ## 🧠 Thuật toán AI
 
 ### 1. **BFS (Breadth-First Search)**
 - Thuật toán tìm kiếm theo chiều rộng
 - Tìm đường đi ngắn nhất đến thức ăn gần nhất
-- Phù hợp cho Level 1
 
 ### 2. **Local Search**
 - Thuật toán tìm kiếm cục bộ
 - Tối ưu hóa di chuyển trong vùng lân cận
-- Phù hợp cho Level 2
 
 ### 3. **Minimax**
 - Thuật toán game theory
 - Dự đoán và đối phó với di chuyển của ma quái
 - Phù hợp cho Level 3 (khó nhất)
 
-### 4. **A* cho ma quái**
+### 4. **A* cho Ghost**
 - Ma quái sử dụng thuật toán A* để truy đuổi Pac-Man
 - Tạo thử thách thông minh cho người chơi
 
@@ -69,17 +68,22 @@ python Source/main.py
    ```bash
    python Source/main.py
    ```
+   
 
 2. **Chọn map**: Sử dụng menu để chọn 1 trong 5 map có sẵn
 
-3. **Chọn thuật toán**: 
-   - Level 1: BFS
-   - Level 2: Local Search  
-   - Level 3: Minimax
+3. **Chọn thuật toán cho Ghost**: 
+   -  No moving
+   -  Random Move  
+   -  A* Move
+4. **Chọn thuật toán cho Pacman**: 
+   -  BFS
+   -  Local Search  
+   -  Minimax
 
-4. **Quan sát AI**: Xem Pac-Man tự động di chuyển và thu thập thức ăn
+5. **Quan sát AI**: Xem Pac-Man tự động di chuyển và thu thập thức ăn
 
-5. **Điều khiển**: Game chạy tự động, không cần input từ người dùng
+* **Điều khiển**: Game chạy tự động, không cần control từ người dùng
 
 ## 📁 Cấu trúc dự án
 
@@ -130,6 +134,34 @@ Ví dụ cấu trúc file map:
 1 1                     # Vị trí ban đầu của Pac-Man
 ```
 
+## 🖼 Hình ảnh minh họa
+
+### Game Sprites
+<div align="center">
+
+**Pac-Man Sprites:**
+
+<img src="Source/Images/1.png" alt="Pacman 1" width="40"> <img src="Source/Images/2.png" alt="Pacman 2" width="40"> <img src="Source/Images/3.png" alt="Pacman 3" width="40"> <img src="Source/Images/4.png" alt="Pacman 4" width="40">
+
+**Ghost Sprites:**
+
+<img src="Source/Images/Blinky.png" alt="Blinky" width="40"> <img src="Source/Images/Pinky.png" alt="Pinky" width="40"> <img src="Source/Images/Inky.png" alt="Inky" width="40"> <img src="Source/Images/Clyde.png" alt="Clyde" width="40">
+
+</div>
+
+### Game Backgrounds
+
+| Menu Chính | Game Over | Thắng Game |
+|------------|-----------|------------|
+| ![Home Background](Source/Images/home_bg.png) | ![Game Over](Source/Images/gameover_bg.png) | ![Win Background](Source/Images/win_bg.jpg) |
+
+### Giao diện Game
+- **Menu chọn level Ghost**: `Source/Images/ghost_level_bg.png`
+- **Màn hình giới thiệu**: `Source/Images/intro_bg.png` 
+- **Background kết thúc**: `Source/Images/Over_bg.jpg`
+
+> **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
+
 ## 🎮 Gameplay
 
 - **Mục tiêu**: Thu thập tất cả thức ăn trên map
@@ -144,12 +176,6 @@ Dự án bao gồm các báo cáo chi tiết:
 - `Project_report_N18.ipynb`: Báo cáo cuối kỳ với kết quả thực nghiệm
 
 ## 🔧 Tùy chỉnh
-
-### Thay đổi thuật toán mặc định
-Chỉnh sửa trong `Source/Constants/constants.py`:
-```python
-ALGORITHM: str = "MINIMAX"  # Có thể thay bằng "BFS" hoặc "Local Search"
-```
 
 ### Thêm map mới
 1. Tạo file `.txt` mới trong thư mục `Map/`
@@ -173,10 +199,6 @@ Chào mừng mọi đóng góp! Để đóng góp:
 
 Dự án này được phát hành dưới MIT License. Xem file `LICENSE` để biết thêm chi tiết.
 
-## 👥 Tác giả
-
-- **Nhóm G18** - Phát triển và báo cáo giữa kỳ
-- **Nhóm N18** - Báo cáo cuối kỳ và hoàn thiện
 
 ## 📞 Liên hệ
 
@@ -184,4 +206,4 @@ Nếu bạn có câu hỏi hoặc góp ý, vui lòng tạo issue trên GitHub re
 
 ---
 
-*Dự án được phát triển cho môn học Trí tuệ nhân tạo*
+*Project được phát triển cho môn học Nhập môn Trí tuệ nhân tạo IT3160 - HUST *
