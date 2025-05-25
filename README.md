@@ -1,6 +1,7 @@
 # 🎮 Pac-Man AI Agent
 
-Project Intro to AI : Pac-Man với AI Agent được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán Search AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
+Project Intro to AI : Đánh giá và kiểm thử thuật toán cho tác tử Pacman.
+Project được phát triển bằng Python và Pygame. Dự án triển khai nhiều thuật toán Search AI khác nhau để điều khiển Pac-Man tự động di chuyển và thu thập thức ăn trong khi tránh ma quái.
 
 ## 📋 Mục lục
 - [Tính năng chính](#-tính-năng-chính)
@@ -8,10 +9,9 @@ Project Intro to AI : Pac-Man với AI Agent được phát triển bằng Pytho
 - [Cài đặt](#-cài-đặt)
 - [Cách sử dụng](#-cách-sử-dụng)
 - [Cấu trúc dự án](#-cấu-trúc-dự-án)
-- [Cấu hình map](#-cấu-hình-map)
-- [Hình ảnh minh họa](#-hình-ảnh-minh-họa)
-- [GamePlay](#-gameplay)
+- [Giao diện Game](#-Giao-diện-Game)
 - [Báo cáo](#-báo-cáo)
+- [Tùy chỉnh](#-tùy-chỉnh)
 - [Đóng góp](#-đóng-góp)
 
 ## 🚀 Tính năng chính
@@ -37,11 +37,11 @@ Project Intro to AI : Pac-Man với AI Agent được phát triển bằng Pytho
 ### 3. **Minimax**
 - Thuật toán game theory
 - Dự đoán và đối phó với di chuyển của ma quái
-- Phù hợp cho Level 3 (khó nhất)
 
-### 4. **A* cho Ghost**
-- Ma quái sử dụng thuật toán A* để truy đuổi Pac-Man
-- Tạo thử thách thông minh cho người chơi
+### 4. **A*  cho Ghost**
+- Ghost sử dụng thuật toán A* để truy đuổi Pac-Man
+
+> **Lưu ý**: Giải thích chi tiết thuật toán có trong Report!
 
 ## 🛠 Cài đặt
 
@@ -52,7 +52,7 @@ Project Intro to AI : Pac-Man với AI Agent được phát triển bằng Pytho
 ### Cách cài đặt
 ```bash
 # Clone repository
-git clone https://github.com/your-username/Pacman_Agent.git
+git clone https://github.com/NeoCyber05/Pacman_Agent.git
 cd Pacman_Agent
 
 # Cài đặt dependencies
@@ -68,7 +68,6 @@ python Source/main.py
    ```bash
    python Source/main.py
    ```
-   
 
 2. **Chọn map**: Sử dụng menu để chọn 1 trong 5 map có sẵn
 
@@ -113,12 +112,34 @@ Pacman_Agent/
 │   ├── map4.txt         # Map 4
 │   └── map5.txt         # Map 5
 ├── Report/              # Báo cáo dự án
-│   ├── Midterm_Report_G18.IPYNB
-│   └── Project_report_N18.ipynb
-└── README.md           # File này
+│   |── Final_Report.ipynb
+│  
+└── README.md          
 ```
 
-## 🗺 Cấu hình map
+## Giao diện Game
+
+- **Màn hình khởi tạo**: `Demo/Start.jpg`
+- **Màn hình chọn Ghost Move**: `Demo/select_ghost.jpg`
+- **Màn hình chọn Pacman Move**: `Demo/select_pacman.jpg`
+- **Màn hình 5 map**: `Demo/demo_map.jpg`
+- **Background kết thúc**: `Source/Images/Over_bg.jpg`
+
+> **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
+
+## 📊 Báo cáo
+
+Dự án bao gồm  báo cáo chi tiết:
+- `Final_Report.ipynb`: Báo cáo cuối kỳ với giải thích chi tiết thuật toán và kết quả thực nghiệm 
+
+## 🔧 Tùy chỉnh
+
+### Thêm map mới
+1. Tạo file `.txt` mới trong thư mục `Map/`
+2. Định dạng theo cấu trúc map hiện tại
+3. Cập nhật menu trong `main.py`
+
+### 🗺 Cấu hình map
 
 Các file map sử dụng format text với các ký hiệu:
 - `0`: Đường đi trống
@@ -134,56 +155,8 @@ Ví dụ cấu trúc file map:
 1 1                     # Vị trí ban đầu của Pac-Man
 ```
 
-## 🖼 Hình ảnh minh họa
-
-### Game Sprites
-<div align="center">
-
-**Pac-Man Sprites:**
-
-<img src="Source/Images/1.png" alt="Pacman 1" width="40"> <img src="Source/Images/2.png" alt="Pacman 2" width="40"> <img src="Source/Images/3.png" alt="Pacman 3" width="40"> <img src="Source/Images/4.png" alt="Pacman 4" width="40">
-
-**Ghost Sprites:**
-
-<img src="Source/Images/Blinky.png" alt="Blinky" width="40"> <img src="Source/Images/Pinky.png" alt="Pinky" width="40"> <img src="Source/Images/Inky.png" alt="Inky" width="40"> <img src="Source/Images/Clyde.png" alt="Clyde" width="40">
-
-</div>
-
-### Game Backgrounds
-
-| Menu Chính | Game Over | Thắng Game |
-|------------|-----------|------------|
-| ![Home Background](Source/Images/home_bg.png) | ![Game Over](Source/Images/gameover_bg.png) | ![Win Background](Source/Images/win_bg.jpg) |
-
-### Giao diện Game
-- **Menu chọn level Ghost**: `Source/Images/ghost_level_bg.png`
-- **Màn hình giới thiệu**: `Source/Images/intro_bg.png` 
-- **Background kết thúc**: `Source/Images/Over_bg.jpg`
-
-> **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
-
-## 🎮 Gameplay
-
-- **Mục tiêu**: Thu thập tất cả thức ăn trên map
-- **Thách thức**: Tránh ma quái di chuyển thông minh
-- **Điểm số**: Được cộng khi thu thập thức ăn
-- **Kết thúc**: Game kết thúc khi Pac-Man chạm ma quái hoặc thu thập hết thức ăn
-
-## 📊 Báo cáo
-
-Dự án bao gồm các báo cáo chi tiết:
-- `Midterm_Report_G18.IPYNB`: Báo cáo giữa kỳ với phân tích thuật toán
-- `Project_report_N18.ipynb`: Báo cáo cuối kỳ với kết quả thực nghiệm
-
-## 🔧 Tùy chỉnh
-
-### Thêm map mới
-1. Tạo file `.txt` mới trong thư mục `Map/`
-2. Định dạng theo cấu trúc map hiện tại
-3. Cập nhật menu trong `main.py`
-
 ### Tùy chỉnh giao diện
-Chỉnh sửa các hằng số màu sắc và kích thước trong `constants.py`
+Chỉnh sửa các hằng số màu sắc và kích thước,FPS,.... trong `constants.py`
 
 ## 🤝 Đóng góp
 
@@ -195,10 +168,6 @@ Chào mừng mọi đóng góp! Để đóng góp:
 4. Push lên branch (`git push origin feature/AmazingFeature`)
 5. Mở Pull Request
 
-## 📄 License
-
-Dự án này được phát hành dưới MIT License. Xem file `LICENSE` để biết thêm chi tiết.
-
 
 ## 📞 Liên hệ
 
@@ -206,4 +175,4 @@ Nếu bạn có câu hỏi hoặc góp ý, vui lòng tạo issue trên GitHub re
 
 ---
 
-*Project được phát triển cho môn học Nhập môn Trí tuệ nhân tạo IT3160 - HUST *
+*Project được phát triển cho môn học Nhập môn Trí tuệ nhân tạo IT3160 - HUST*
