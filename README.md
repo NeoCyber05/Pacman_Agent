@@ -38,7 +38,7 @@ Project được phát triển bằng Python và Pygame. Dự án triển khai n
 - Thuật toán game theory
 - Dự đoán và đối phó với di chuyển của ma quái
 
-### 4. **A***  cho Ghost**
+### 4. **A***  cho Ghost
 - Ghost sử dụng thuật toán A* để truy đuổi Pac-Man
 
 > **Lưu ý**: Giải thích chi tiết thuật toán có trong Report!
