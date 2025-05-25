@@ -118,12 +118,19 @@ Pacman_Agent/
 ```
 
 ## Giao diện Game
+**Màn hình khởi tạo:**
+![Màn hình khởi tạo](Demo/Start.jpg)
 
-- **Màn hình khởi tạo**: `Demo/Start.jpg`
-- **Màn hình chọn Ghost Move**: `Demo/select_ghost.jpg`
-- **Màn hình chọn Pacman Move**: `Demo/select_pacman.jpg`
-- **Màn hình 5 map**: `Demo/demo_map.jpg`
-- **Background kết thúc**: `Source/Images/Over_bg.jpg`
+**Màn hình chọn Ghost Move:**
+![Màn hình chọn Ghost Move](Demo/select_ghost.jpg)
+
+**Màn hình chọn Pacman Move:**
+![Màn hình chọn Pacman Move](Demo/select_pacman.jpg)
+
+**Màn hình 5 map:**
+![Màn hình 5 map](Demo/demo_map.jpg)
+**Background kết thúc:**
+![Màn hình 5 map](Source/Images/Over_bg.jpg)
 
 > **Lưu ý**: Để xem đầy đủ các ảnh, hãy chạy game và trải nghiệm trực tiếp!
 
